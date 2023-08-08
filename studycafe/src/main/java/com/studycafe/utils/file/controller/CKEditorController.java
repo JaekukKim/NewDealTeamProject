@@ -1,6 +1,7 @@
 package com.studycafe.utils.file.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,9 @@ public class CKEditorController {
 	@Autowired
 	private S3ServiceImpl s3Service;
 	
+	@Value("${cloud.aws.s3.objurl}")
+	private String objectUrl;
+	
 	// CK Editor 경로변수
 	private final String path = "ck";
 	
@@ -36,7 +40,7 @@ public class CKEditorController {
 		log.info("파일은? : {}", uploadFile);
 		
 		mav.addObject("uploaded", true); // 업로드 완료
-		mav.addObject("url", s3Service.saveFile(uploadFile, path)); // 업로드 파일의 경로
+		mav.addObject("url", objectUrl + s3Service.saveFile(uploadFile, path)); // 업로드 파일의 경로
 		
 		log.info("mav 최종 객체는? : {}", mav);
 		

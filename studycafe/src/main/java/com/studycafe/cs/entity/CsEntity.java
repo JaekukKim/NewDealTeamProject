@@ -68,7 +68,9 @@ public class CsEntity implements Serializable{
 
 	@LastModifiedDate
 	private LocalDateTime modifiedDate;
-
+	
+	private int isDeleted; 
+	
 	@Builder
 	public CsEntity(long idx, @NotNull String csTitle, @NotNull String csContent, @NotNull String csWriter, String filePath ,Timestamp createDate,
 			LocalDateTime modifiedDate, String fileKey , boolean secret , String username) {

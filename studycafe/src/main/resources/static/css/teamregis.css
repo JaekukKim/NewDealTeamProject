@@ -19,83 +19,154 @@
 	row-gap: 3em;
 }
 
-p{
-	margin-bottom: 20px;
+p {
+	margin-top: 20px;
 	display: flex;
 	align-items: center;
 	clear: both;
 }
-.content-p-box{
-	display : block;
-	width : 100%;
+
+.content-p-box {
+	display: block;
+	width: 100%;
 }
 
-label{
-	width : 150px;
-	float : left;
+label {
+	width: 150px;
+	float: left;
 	font-size: 20px;
 	font-weight: 600;
 }
 
-p input[type=text]{
-	width : calc(100% - 150px);
-	padding : 20px;
-	height : 40px;
-	border : 1px solid #e9e9e9;
+p input[type=text] {
+	width: calc(100% - 150px);
+	padding: 20px;
+	height: 40px;
+	border: 1px solid #e9e9e9;
 }
 
-p input[type=file]{
-	border : none;
+p input[type=file] {
+	border: none;
 }
 
-p input[readonly=readonly]{
+p input[readonly=readonly] {
 	background-color: #bebebe;
-	pointer-events : none;
+	pointer-events: none;
 }
-p input[readonly=readonly]:focus{
+
+p input[readonly=readonly]:focus {
 	outline: none;
 }
 
-.ck-editor__editable{
-	min-height : 500px;
-	width : calc(100% - 150px);
-	float : right;
+.ck-editor__editable {
+	min-height: 500px;
+	width: calc(100% - 150px);
+	float: right;
 	margin-bottom: 20px;
 }
 
-form{
-	width : 80%;
+form {
+	width: 80%;
+}
+form > div{
+	margin-top : 20px;
 }
 
-.regis-btn{
-	float : right;
-	margin : 20px 0;
-	width : 200px;
-	height : 80px;
+.regis-btn {
+	float: right;
+	margin: 20px 0;
+	width: 200px;
+	height: 80px;
 	font-size: 20px;
-	font-weight : 600;
-	border : none;
+	font-weight: 600;
+	border: none;
 	border-radius: 7px;
 }
 
-.regis-btn:hover{
+.regis-btn:hover {
 	background-color: black;
 	cursor: pointer;
 	color: white;
 }
-.select_img{
+
+.select_img {
 	text-align: right;
 }
 
-img[class=inner-img]{
-	max-width : calc(100% - 150px);
-	max-height : 500px;
+img[class=inner-img] {
+	max-width: calc(100% - 150px);
+	max-height: 500px;
 }
 
-span[class=secret-yn]{
-	margin-right : 20px;
+span[class=secret-yn] {
+	margin-right: 20px;
 }
 
-.secret-yn{
-	margin-right : 20px;
+.secret-yn {
+	margin-right: 20px;
+}
+.error-box{
+	margin-top : 0;
+}
+
+.error-box>span {
+	margin : 0;
+	padding : 0;
+	color: red;
+	border: none;
+	background-color: white;
+}
+
+.success-box>span {
+	margin : 0;
+	padding : 0;
+	color: lightgreen;
+	border: none;
+	/* background-color: white; */
+}
+
+.team-add-btn {
+	margin-left: 150px;
+	width: 4rem;
+	height: 2rem;
+	border: none;
+	background-color: #fff;
+	box-shadow: 0px 0px 1.3rem #cecece;
+}
+
+.team-add-btn:hover {
+cursor: pointer;
+}
+
+#user-table  {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+
+#user-table td, #user-table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#user-table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+#user-table tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+#user-table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #04AA6D;
+	color: white;
+  }
+
+
+#userSelectDiv {
+	display: none;
 }

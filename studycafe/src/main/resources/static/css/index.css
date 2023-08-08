@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .main-wrap {
-	padding-top: 100px;
+	padding-top: 70px;
 	min-height: calc(100% - 70px);
 	width: 100%;
 	margin: auto;
@@ -9,12 +9,11 @@
 
 table {
 	border-collapse: collapse;
-	margin: auto;
 }
 
 /* 텍스트 오버플로우시 글자 ...으로 표기 */
 .team-name {
-	width : 200px;
+	width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -32,13 +31,26 @@ tr>th {
 }
 
 .main-ranking {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	margin: auto;
-	width: 500px;
+	width: 80%;
+	min-height : 600px;
 	text-align: center;
+	align-items: center;
+	
+	background-image: linear-gradient(
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.7)
+      ),url("/img/ranking-img.png");
+      
+	background-repeat: round;
+	background-size: cover;
 }
 
 .main-ranking>h1 {
-	margin: 20px;
+	margin-bottom: 20px;
 }
 
 .main-ranking>ul {
@@ -74,16 +86,15 @@ tr>th {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-content: center;
-	width: 80%;
+	width: 60%;
 	margin-top: 50px;
 	row-gap: 3em;
 }
 
 .index>label {
 	display: inline-block;
-	background-color: black;
-	color: white;
 	width: 100%;
+	height: 80px;
 	border-radius: 5px;
 	padding: 20px;
 	margin-bottom: 20px;
@@ -91,8 +102,41 @@ tr>th {
 	font-weight: 600;
 }
 
-label>a:visited {
+.main-qna>label {
 	color: white;
+	background-image: url(/img/qna-logo.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(/img/qna-logo.png);
+}
+
+.main-study>label {
+	background-color: #DDEEEB;
+	background-image: url(/img/studyboard-logo.png);
+	background-repeat: no-repeat;
+	background-size: 30% 100%;
+	background-position: right;
+}
+
+.main-team>label {
+	background-color: #CFD9E0;
+	background-image: url(/img/teamboard-logo.png);
+	background-repeat: no-repeat;
+	background-size: 70% 100%;
+	background-position: right;
+	background-image: url(/img/teamboard-logo.png);
+}
+
+.main-auth>label {
+	background-color: #E8DCDC;
+	background-image: url(/img/authboard-logo.png);
+	background-repeat: no-repeat;
+	background-size: 30% 100%;
+	background-position: right;
+}
+
+label>a:visited {
+	color: black;
 }
 
 div>a:visited {
@@ -100,5 +144,5 @@ div>a:visited {
 }
 
 div>a:hover, label>a:hover {
-	color: skyblue;
+	color: #0b7fd3;
 }

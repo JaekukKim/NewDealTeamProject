@@ -41,6 +41,12 @@ public class TeamBoardEntity {
 	@NotNull
 	@Column(length = 20, updatable = false)
 	private String teamBoardWriter;
+	
+	@NotNull
+	private String teamName;
+	
+	@NotNull
+	private String teamMember;
 
 	@CreationTimestamp
 	@Column(updatable = false)
@@ -50,13 +56,15 @@ public class TeamBoardEntity {
 	private LocalDateTime modifiedDate;
 
 	@Builder
-	public TeamBoardEntity(long teamBoardNum, @NotNull String teamBoardTitle, @NotNull String teamBoardContent, @NotNull String teamBoardWriter,
-			Timestamp createDate, LocalDateTime modifiedDate) {
+	public TeamBoardEntity(long teamBoardNum, @NotNull String teamBoardTitle, @NotNull String teamBoardContent, @NotNull String teamBoardWriter, @NotNull String teamName,
+			@NotNull String teamMember, Timestamp createDate, LocalDateTime modifiedDate) {
 		super();
 		this.teamBoardNum = teamBoardNum;
 		this.teamBoardTitle = teamBoardTitle;
 		this.teamBoardContent = teamBoardContent;
 		this.teamBoardWriter = teamBoardWriter;
+		this.teamName = teamName;
+		this.teamMember = teamMember;
 		this.createDate = createDate;
 		this.modifiedDate = modifiedDate;
 	}

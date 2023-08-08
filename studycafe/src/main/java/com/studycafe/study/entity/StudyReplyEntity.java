@@ -29,7 +29,7 @@ public class StudyReplyEntity {
 	@JoinColumn(name = "studyNum")	
 	private StudyEntity studyEntity; // 스터디 번호 외래키
 
-	@Column(length = 20)
+	@Column(length = 100)
 	@NotNull
 	private String studyReplyWriter; // 스터디 댓글 작성자
 	

@@ -30,3 +30,55 @@ $("#file").change(function() {
 		reader.readAsDataURL(this.files[0]);
 	}
 });
+
+function teamNameAdd() {
+	window.open("/team/teamNameRegis", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+	
+}
+function teamMemberAdd() {
+	window.open("/team/teamMemberRegis", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+
+}
+
+
+function validPost(){
+	
+	// let errorMsg = document.querySelectorAll(".error-box > span");
+	
+	// if(errorMsg != null || errorMsg != ""){
+	// 	for(let i = 0; i < errorMsg.length; i++){
+	// 		console.log(errorMsg[i].value);
+	// 		alert(errorMsg[i].value);
+	// 	}
+	// }
+
+	var teamTitle = $('#team-title');
+	var teamName = $('#team-name');
+	var teamMember = $('#team-member');
+
+	
+	if (teamTitle.val() == "") {
+		alert("제목을 입력해주세요.");
+		teamTitle.focus();
+		return false;
+	}
+    
+	if (teamName.val() == "") {
+		alert("팀 이름을 입력해주세요.");
+		teamName.focus();
+		return false;
+	}
+	
+	if (teamMember.val() == "") {
+		alert("팀원을 추가해주세요.");
+		teamMember.focus();
+		return false;
+	}
+	if(teamMember.val().split(",").length < 2) {
+		alert("팀을 만들기 위해서 최소한 2명의 팀원이 필요합니다.");
+		teamMember.focus();
+		return false;
+	}
+
+	return true;
+}

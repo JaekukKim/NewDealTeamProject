@@ -22,7 +22,7 @@ public class QnaEntity {
 	private long qnaNum; // 질문 답변 번호
 	
 	@NotNull
-	@Column(length = 20)
+	@Column(length = 100)
 	private String qnaWriter; // 질문 답변 작성자
 	
 	@NotNull
@@ -39,7 +39,8 @@ public class QnaEntity {
 	@CreationTimestamp
 	private Timestamp qnaDate;  // 질문 답변 작성일
 
-
+	private int isDeleted; // 댓글 삭제 여부
+	
 
 	
 	

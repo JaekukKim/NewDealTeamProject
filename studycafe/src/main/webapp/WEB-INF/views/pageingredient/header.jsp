@@ -4,7 +4,7 @@
 
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -81,13 +81,13 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="#">나의팀관리</a>
-										</li>
+											<a href="javascript:openMyTeam(${member.teamNumber.teamNumber})">나의팀관리</a>
+										</li><%-- ${contextPath}/myteam/${member.teamNumber.teamNumber} --%>
 										<li>
 											<input type="hidden">
 											<a href="javascript:openTeamChat(${member.teamNumber.teamNumber})">팀채팅방</a>
 										</li>
-											<input type="text" id = "username" value="${member.username}" hidden="hidden"/>
+										<input type="text" id="username" value="${member.username}" hidden="hidden" />
 									</c:otherwise>
 								</c:choose>
 							</sec:authorize>
@@ -102,7 +102,7 @@
 				<ul class="links member-ul">
 					<li>
 						<sec:authorize access="isAuthenticated()">
-							<a href="#" class="desktop-link"> 안녕하세요 <span style="color: yellow;">${member.nickName}</span>님
+							<a href="#" class="desktop-link"> 안녕하세요 <span style="color: yellow;">${member.name}</span>님
 							</a>
 							<input type="checkbox" id="show-memberInfo">
 							<label for="show-memberInfo">${member.nickName}</label>
@@ -115,7 +115,7 @@
 						</sec:authorize>
 						<ul>
 							<sec:authorize access="isAuthenticated()">
-							
+
 								<li>
 									<a href="${contextPath}/logout">로그아웃</a>
 								</li>
@@ -126,9 +126,18 @@
 									</li>
 								</sec:authorize>
 
-								<li>
-									<a href="/member/verificationpage">내정보관리</a>
-								</li>
+								<c:choose>
+									<c:when test="${member.oauth2Path == null }">
+										<li>
+											<a href="/member/verificationpage">내정보관리</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li>
+											<a href="javascript:alertToSocial()">내정보관리</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
 
 							</sec:authorize>
 						</ul>

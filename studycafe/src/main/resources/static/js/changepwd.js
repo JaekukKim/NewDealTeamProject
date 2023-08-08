@@ -1,6 +1,7 @@
 function changePassword() {
 	var password = $("#password").val();
 	var rePassword = $("#rePassword").val();
+	var oneraepassword = $("#oneraepassword").val();
 	var passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	if (password == "" || password.trim() == "") {
 		alert("비밀번호를 입력해주세요.");
@@ -15,17 +16,32 @@ function changePassword() {
 
 	$.ajax({
 		type: "post",
-		url: "/changePassword",
+		url: "/checkPassword",
 		data: {
-			"password": password
+			"oneraepassword" : oneraepassword,
 		},
 		dataType: "json",
 		success: function(data) {
+			
 			if (data == true) {
-				alert("비밀번호가 변경되었습니다.");
-				location.href ="/logout";
+				$.ajax({
+					type:"post",
+					url:"/changePassword",
+					data:{
+						"password":password
+					},
+					dataType:"json",
+					success: function(data){
+						if (data == true){
+							alert("비밀번호가 변경되었습니다.");
+							location.href="/logout";
+						} else{
+							alert("기존 비밀번호와 같습니다. 다르게 설정해주세요.");
+						}
+					}
+				})
 			} else {
-				alert("기존 비밀번호와 같습니다. 다르게 설정해주세요.");
+				alert("현재 비밀번호가 다릅니다. 다시 한 번 확인해주세요.");
 			}
 		}
 	})

@@ -6,7 +6,7 @@
 
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />

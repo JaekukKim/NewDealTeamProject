@@ -157,18 +157,16 @@ public class StudyController {
 	@ResponseBody
 	public String studySelectTimeByMap(@RequestParam("lat") String lat, @RequestParam("long") String lon,
 			@RequestParam("date") String date) {
-		LocalDate localDate = LocalDate.parse(date);
-		List<StudyEntity> studyEntity = studyService.studySelectByMap(Double.parseDouble(lat), Double.parseDouble(lon),
-				localDate);
-
+		LocalDate localDate = LocalDate.parse(date);	
+		List<StudyEntity> studyEntity = studyService.studySelectByMap(Double.parseDouble(lat), Double.parseDouble(lon), localDate);
 		JSONArray times = new JSONArray();
-		for (int i = 0; i > studyEntity.size(); i++) {
-
-			LocalDateTime reserveTime = studyEntity.get(0).getReserveTime();
+		for(StudyEntity study: studyEntity) {
 			JSONObject time = new JSONObject();
-			time.put("time", reserveTime);
+			time.put("time", study.getReserveTime().toString());
 			times.add(time);
 		}
+		
+		
 		return times.toJSONString();
 	}
 }

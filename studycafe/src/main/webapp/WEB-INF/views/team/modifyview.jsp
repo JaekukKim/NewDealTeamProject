@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -38,6 +38,16 @@
 				<p>
 					<label for="team-head">작성자(팀장)</label>
 					<input type="text" id="team-head" name="teamBoardWriter" value="${teamPost.teamBoardWriter }" readonly="readonly">
+				</p>
+				<p>
+					<label for="team-head">팀 이름</label>
+					<input type="text" id="team-name" name="teamName" value="${teamPost.teamName}"  readonly="readonly">
+	
+				</p>
+				<p>
+					<label for="team-head">팀원</label>
+					<input type="text" id="team-member" name="teamMember" value="${teamPost.teamMember}" readonly="readonly">
+
 				</p>
 
 				<p>

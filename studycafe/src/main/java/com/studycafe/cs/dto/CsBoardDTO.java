@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.domain.Page;
 
 import com.studycafe.cs.entity.CsEntity;
@@ -23,7 +26,11 @@ public class CsBoardDTO implements Serializable{
 	
 	// Data Transferation to TeamBoardEntity
 	private long idx;
+	
+	@NotBlank(message = "제목을 반드시 입력해주세요.")
 	private String csTitle;
+	
+	@Size(min = 12, max = 500 , message = "12자 이상 500자 이하의 내용만 가능합니다.")
 	private String csContent;
 	private String csWriter;
 	private String username;

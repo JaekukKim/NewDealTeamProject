@@ -6,7 +6,7 @@
 
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -48,12 +48,10 @@
               placeholder="제목 입력"
             />
           </p>
-
-				<p>
-					<label for="studyWriter">작성자</label>
-					<input type="text" id="studyWriter" name="studyWriter" value="${member.nickName}" readonly="readonly">
-				</p>
-          
+			<p>
+				<label for="studyWriter">작성자</label>
+				<input type="text" id="studyWriter" name="studyWriter" value="${member.nickName}" readonly="readonly">
+			</p>
           <div>
             <label for="studyContent">내용</label>
             <textarea
@@ -233,10 +231,10 @@
                       <div class="accordion-study-time enabled" data-time="11">
                         11:00 ~ 14:00
                       </div>
-                      <div class="accordion-study-time disabled" data-time="14">
+                      <div class="accordion-study-time enabled" data-time="14">
                         14:00 ~ 17:00
                       </div>
-                      <div class="accordion-study-time disabled" data-time="17">
+                      <div class="accordion-study-time enabled" data-time="17">
                         17:00 ~ 20:00
                       </div>
                       <div class="accordion-study-time enabled" data-time="20">

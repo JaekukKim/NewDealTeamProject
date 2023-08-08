@@ -153,8 +153,9 @@ function join() {
 	var zipcode = $("#zipcode").val();
 	var address1 = $("#address1").val();
 	var address2 = $("#address2").val();
+	var joinMethod = $("#joinMethod").val();
 
-	var memberEntity = { username, password, email, nickName, name };
+	var memberEntity = { username, password, email, nickName, name, joinMethod };
 
 	var memberAddressEntity = { zipcode, address1, address2 };
 
@@ -195,21 +196,36 @@ function checkAll() {
 	var emailAuth = $("#emailAuth").val();
 	var zipcode = $("#zipcode").val();
 	var address1 = $("#address1").val();
+	var joinMethod = $("#joinMethod").val();
 
-	if (!checkUsername(username, idCheck)) {
-		return false;
-	} else if (!checkPassword(username, password, rePassword)) {
-		return false;
-	} else if (!checkNickName(nickName, nickCheck)) {
-		return false;
-	} else if (!checkName(name)) {
-		return false;
-	} else if (!checkMail(email)) {
-		return false;
-	} else if (!checkEmailAuth(emailAuth)) {
-		return false;
-	} else if (!checkAddress(zipcode, address1)) {
-		return false;
+	if (joinMethod === "NORMAL") {
+		if (!checkUsername(username, idCheck)) {
+			return false;
+		} else if (!checkPassword(username, password, rePassword)) {
+			return false;
+		} else if (!checkNickName(nickName, nickCheck)) {
+			return false;
+		} else if (!checkName(name)) {
+			return false;
+		} else if (!checkMail(email)) {
+			return false;
+		} else if (!checkEmailAuth(emailAuth)) {
+			return false;
+		} else if (!checkAddress(zipcode, address1)) {
+			return false;
+		}
+
+	} else {
+		
+		if (!checkPassword(username, password, rePassword)) {
+			return false;
+		} else if (!checkNickName(nickName, nickCheck)) {
+			return false;
+		} else if (!checkName(name)) {
+			return false;
+		} else if (!checkAddress(zipcode, address1)) {
+			return false;
+		}
 	}
 
 	return join();

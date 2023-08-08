@@ -2,6 +2,7 @@ package com.studycafe.team.entity;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +11,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.studycafe.team.teamboard.dto.TeamBoardDTO;
+
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class TeamEntity {
 	
 	@Id
@@ -26,6 +33,7 @@ public class TeamEntity {
 	
 	@NotNull
 	@Column(unique=true)
+	@Size(min=3)
 	private String teamName;
 	
 	@NotNull
@@ -41,10 +49,16 @@ public class TeamEntity {
 	@ColumnDefault("0")
 	private int approveCount; 
 	
-	@NotNull
 	@CreationTimestamp
 	private Timestamp createDate;
 	
 	private LocalDate approveDate; // 팀 승인 날짜
+	
+	@Builder
+	public TeamEntity( String teamName, String teamHead, int memberCount) {
+		this.teamName = teamName;
+		this.teamHead = teamHead;
+		this.memberCount = memberCount;
+	}
 	
 }

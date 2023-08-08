@@ -17,7 +17,10 @@
 		<jsp:include page="../member/verificationpage-aside.jsp"></jsp:include>
 		<div class="password-wrapper">
 			<h2>비밀번호 변경</h2>
-
+			
+			<label>현재 비밀번호</label>
+			<input type="password" id="oneraepassword" name="oneraepassword"/>
+			
 			<label>새로운 비밀번호</label>
 			<input type="password" id="password" name="password" placeholder="영문,숫자,특수문자 조합 (8~15자)" />
 

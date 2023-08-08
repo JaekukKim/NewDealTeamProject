@@ -600,6 +600,7 @@ function renderStudy() {
   return table1;
 }
 
+
 // 메인 실행 함수
 document.addEventListener("DOMContentLoaded", function () {
   // 사이드 바 링크 활성화 비활성화 설정
@@ -609,9 +610,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   for (let link of links) {
     if (link.dataset.path === path) {
-      link.classList.add("active");
+      link.style.color = "#ebb917";
     } else {
-      link.classList.remove("active");
+      link.style.color = "#000";
     }
   }
 

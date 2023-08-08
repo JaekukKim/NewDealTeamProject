@@ -1,5 +1,9 @@
 package com.studycafe.cs.controller;
 
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +13,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,7 +28,8 @@ import com.studycafe.cs.dto.CsBoardPageDTO;
 import com.studycafe.cs.entity.CsEntity;
 import com.studycafe.cs.repository.CsRepository;
 import com.studycafe.cs.service.CsService;
-import com.studycafe.member.entity.MemberAdaptor;
+import com.studycafe.member.auth.PrincipalDetails;
+import com.studycafe.utils.handler.ValidationHandler;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +41,10 @@ public class CsController {
 
 	@Autowired
 	private CsRepository csRepository;
-	
+
+	@Autowired
+	private ValidationHandler validationHandler;
+
 	private final String identifier = "cs";
 
 	// 게시판 접속 및 게시글 리스트 불러오기 및 페이징
@@ -71,8 +80,25 @@ public class CsController {
 
 	// 글 등록 로직
 	@PostMapping("/cs/csregis")
-	public String csRegist(CsBoardDTO csBoardDTO, @RequestParam("file") MultipartFile file) {
-		
+	public String csRegist(
+			@Valid CsBoardDTO csBoardDTO,
+			BindingResult bindingResult,
+			@RequestParam("file") MultipartFile file,
+			Model model) {
+
+		if (bindingResult.hasErrors()) {
+
+			Map<String, String> validationResult = validationHandler.validateHandling(bindingResult);
+
+			for (String errorKey : validationResult.keySet()) {
+
+				model.addAttribute(errorKey, validationResult.get(errorKey));
+
+			}
+
+			return "/cs/csregis";
+		}
+
 		csService.csBoardRegis(csBoardDTO, identifier, file);
 
 		return "redirect:/cs/csboard";
@@ -83,9 +109,9 @@ public class CsController {
 	public String getCsBoardPost(@PathVariable("idx") int idx, Model model) {
 
 		CsBoardDTO getPost = csService.getCsBoardPost(idx);
-		
-		log.info("게시글번호: {}",getPost.getIdx());
-		log.info("파일키: {}",getPost.getFileKey());
+
+		log.info("게시글번호: {}", getPost.getIdx());
+		log.info("파일키: {}", getPost.getFileKey());
 
 		model.addAttribute("csPost", getPost);
 
@@ -95,15 +121,15 @@ public class CsController {
 
 	// 글 수정 페이지 진입
 	@GetMapping("/cs/modifyview/{idx}")
-	public String modifyCsBoardPostPage(@PathVariable("idx") long idx, Model model, @AuthenticationPrincipal MemberAdaptor memberAdaptor) {
+	public String modifyCsBoardPostPage(@PathVariable("idx") long idx, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
 		CsBoardDTO getPost = csService.getCsBoardPost(idx);
 
 		CsEntity getWriter = csRepository.findById(idx).get();
-		
+
 		log.info("수정페이지 파일키 수정페이지 파일키 : {}", getWriter.getFileKey());
 
-		if (memberAdaptor == null) {
+		if (principalDetails == null) {
 
 			throw new AccessDeniedException("남의 게시글을 함부러 수정하려고 하시면 안돼요!!");
 
@@ -111,7 +137,7 @@ public class CsController {
 
 			String csBoardWriter = getWriter.getCsWriter();
 
-			String loginedUserNickName = memberAdaptor.getMember().getNickName();
+			String loginedUserNickName = principalDetails.getNickName();
 
 			if (!csBoardWriter.equals(loginedUserNickName)) {
 
@@ -129,9 +155,9 @@ public class CsController {
 	// 글 수정
 	@PatchMapping("/cs/modifyview/{idx}")
 	public String modifyCsBoard(CsBoardDTO csBoardDTO, @RequestParam("file") MultipartFile file) {
-		
+
 		log.info("수정시에 파일키 수정시에 파일키 : {}", csBoardDTO.getFileKey());
-		
+
 		csService.csBoardModify(csBoardDTO, identifier, file);
 
 		return "redirect:/cs/csboard/{idx}";

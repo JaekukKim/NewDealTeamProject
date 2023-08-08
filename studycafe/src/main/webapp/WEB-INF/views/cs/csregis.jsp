@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<sec:authentication property="principal.member" var="member" />
+<sec:authentication property="principal.memberEntity" var="member" />
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,11 @@
 				<p>
 					<label for="team-title">제목</label>
 					<input type="text" id="team-title" name="csTitle" placeholder="제목 입력">
+				</p>
+				
+				<p class="error-box">
+					<label></label>
+					<span>${valid_csTitle }</span>
 				</p>
 
 				<p>
@@ -53,6 +58,11 @@
 						문의 내역을 입력해주세요.
 					</textarea>
 				</div>
+				
+				<p class="error-box">
+					<label></label>
+					<span>${valid_csContent }</span>
+				</p>
 
 				<!-- 이미지 첨부시 미리보기 -->
 				<p>

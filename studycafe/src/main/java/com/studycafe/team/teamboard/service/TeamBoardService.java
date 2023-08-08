@@ -24,5 +24,4 @@ public interface TeamBoardService {
 	
 	// 삭제
 	public boolean deleteTeamBoard(long idx);
-
 }

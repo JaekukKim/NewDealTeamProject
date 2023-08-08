@@ -6,3 +6,4 @@
 /application-social.yml
 /application-gpt.yml
 /application-mail.yml
+/application-oauth2.yml

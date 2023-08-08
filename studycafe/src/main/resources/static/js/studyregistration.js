@@ -238,6 +238,7 @@ function displayPlaces(places) {
 					
 					selectLong = lng;
 					selectLat = lat;
+
 				
 				
 					myMarker.setMap(null); // 선택한 마커 삭제
@@ -263,7 +264,6 @@ function displayPlaces(places) {
 // 마커 클릭시 스터디 모집 예약 시간을 확인하는 함수입니다.
 function getStudyDateAvailability(lat, long, date){
 		let httpRequest = new XMLHttpRequest();
-		let result;
 		if (!httpRequest) {
 		alert("ajax 요청을 만드는데 실패하였습니다.");
 			return false;
@@ -273,8 +273,7 @@ function getStudyDateAvailability(lat, long, date){
 		try {
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			if (this.readyState == 4 && httpRequest.status === 200) {
-				result = JSON.parse(httpRequest.responseText);
-
+				let result = JSON.parse(httpRequest.responseText);
 				updateTable(result);
 			} else {
 				alert("httpRequest 요청에 문제가 있습니다.");
@@ -306,32 +305,44 @@ function selectDateHandler(date) {
 
 // 예약 가능 테이블을 업데이트 하는 함수.
 function updateTable(times){
-	times.forEach((t)=>{
-		const time = Number(t.getHours());
-		const rows = document.querySelectorAll('#reserve-info-table tr');
-		rows.forEach((row)=>{
-			const data = parseInt(row.dataset.time);
-			if(data === time){
-				row.addClass("disabled");
-				row.removeClass("enabled");
-				row.children[1].innerHTML = "예약 불가능";
-			}
-		});
-		const study_times = document.getElementsByClassName("accordion-study-time");
-		study_times.forEach((t)=>{
-			const data = parseInt(t.dataset.time);
-			if(data === time){
-				t.addClass("disabled");
-				t.removeClass("enabled");
-			}
-		})
+	const rows = document.querySelectorAll('#reserve-info-table tr:not(:first-child)');
+	const study_times = document.querySelectorAll(".accordion-study-time");
+	const hours = times.map(t=>{
+		let date = new Date(t.time);
+		let hour = Number(date.getHours());	
+		return hour;
+	});
 
+	rows.forEach((row)=>{
+		const data = parseInt(row.dataset.time);
+		// 테이블 초기화
+		row.classList.add("enabled");
+		row.classList.remove("disabled");
 		
+		// 예약된 시간 disable
+		if(hours.find(h=>h === data)){
+			row.classList.add("disabled");
+			row.classList.remove("enabled");
+			row.children[1].innerHTML = "예약 불가능";
+		}
+	});
+	
+	study_times.forEach((t)=>{
+		const data = parseInt(t.dataset.time);
 
-	} );
+		// 아코디언 초기화
+		t.classList.add("enabled");
+		t.classList.remove("disabled");
+
+		// 예약된 시간 disable
+		if(hours.find(h=>h === data)){
+			t.classList.add("disabled");
+			t.classList.remove("enabled");
+		}
+	})
+
 	document.getElementById("reserve-info-table").style.display = "block";
 	document.getElementById("accordion").style.display = "block";
-
 
 }
 

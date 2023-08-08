@@ -31,20 +31,30 @@
 						<div class="row_group">
 							<div class="join_row id">
 								<label id="join_title">아이디</label>
-								<div>
-									<span class="ps_box int_id">
-										<input type="text" id="username" name="username" maxlength="12" placeholder="영문소문자,숫자조합 (6~12자)" />
-									</span>
-									<button type="button" id="idCheckBtn" name="idCheckBtn" onclick="idCheck()" disabled>중복체크</button>
-								</div>
-								<div>
-									<input type="text" style="display: none;" value="0" id="idCheck" />
-									<span id="useUsername" style="display: none; color: blue;">사용 가능한 아이디 입니다.</span>
-									<span id="notUseUsername" style="display: none; color: red;">이미 존재하는 아이디 입니다.</span>
-									<span id="notvaliUsername" style="display: none; color: red;">영문, 숫자 조합으로 6자이상 12자 이하의 영문만 입력해주세요.</span>
-									<span id="notUsername" style="display: none; color: red;">아이디를 입력해주세요.</span>
-									<span id="notIdCheck" style="display: none; color: red;">아이디를 중복체크를 해주세요.</span>
-								</div>
+								<c:choose>
+									<c:when test="${userInfo.username == null || userInfo.username eq '' }">
+										<div>
+											<span class="ps_box int_id">
+												<input type="text" id="username" name="username" maxlength="12" placeholder="영문소문자,숫자조합 (6~12자)" />
+												<input type="hidden" id="joinMethod" name="joinMethod" value="NORMAL" readonly="readonly" />
+											</span>
+											<button type="button" id="idCheckBtn" name="idCheckBtn" onclick="idCheck()" disabled>중복체크</button>
+										</div>
+										<div>
+											<input type="text" style="display: none;" value="0" id="idCheck" />
+											<span id="useUsername" style="display: none; color: blue;">사용 가능한 아이디 입니다.</span>
+											<span id="notUseUsername" style="display: none; color: red;">이미 존재하는 아이디 입니다.</span>
+											<span id="notvaliUsername" style="display: none; color: red;">영문, 숫자 조합으로 6자이상 12자 이하의 영문만 입력해주세요.</span>
+											<span id="notUsername" style="display: none; color: red;">아이디를 입력해주세요.</span>
+											<span id="notIdCheck" style="display: none; color: red;">아이디를 중복체크를 해주세요.</span>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="join_row id">
+											<input id="username" name="username" maxlength="12" value="${userInfo.username}" readonly="readonly" />
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 
 							<div class="join_row password">

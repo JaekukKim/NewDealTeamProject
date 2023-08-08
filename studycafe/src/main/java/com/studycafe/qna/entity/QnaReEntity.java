@@ -28,7 +28,7 @@ public class QnaReEntity {
 	@JoinColumn(name = "qnaNum")
 	private QnaEntity qnaEntity;
 	
-	@Column(length = 20)
+	@Column(length = 100)
 	@NotNull
 	private String QnaReWriter;
 	

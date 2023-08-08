@@ -1,0 +1,439 @@
+@charset "UTF-8";
+
+.main-wrap {
+	padding-top: 100px;
+	min-height: calc(100% - 70px);
+	width: 100%;
+	margin: auto;
+}
+
+.index-ingredient {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: center;
+	width: 100%;
+	margin-top: 50px;
+	row-gap: 3em;
+}
+
+p{
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	clear: both;
+}
+
+p input[readonly=readonly]{
+	background-color: #e9e9e9;
+	pointer-events : none;
+}
+p input[readonly=readonly]:focus{
+	outline: none;
+}
+
+.qnaContent-p-box{
+	display : block;
+	width : 100%;
+}
+
+label{
+	width : 150px;
+	float : left;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+p input[type=text]{
+	width : calc(100% - 150px);
+	padding : 20px;
+	height : 40px;
+	border : 1px solid #e9e9e9;
+}
+
+p input[type=text]:focus {
+	border-color: #333;
+	outline: 0;
+	border-width: 1px;
+}
+
+p input[type=file]{
+	border : none;
+}
+
+p input[type=date]{
+	width : 200px;
+	padding : 20px;
+	height : 40px;
+	border : 1px solid #e9e9e9;
+}
+
+.ck-editor__editable{
+	min-height : 500px;
+	width : calc(100% - 150px);
+	float : right;
+	margin-bottom: 20px;
+}
+
+
+.ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+	border-color: #333;
+	outline: 0;
+	border-width: 1px;
+}
+
+form{
+	width : 80%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+#reserveBtn {
+	height: 42px;
+}
+
+#registerBtn {
+	float: right;
+	height: 40px;
+	width: 100px;
+	margin: 0 0 20px 0;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.select_img{
+	text-align: center;
+}
+
+.reserve_btn{
+	float : right;
+	margin : 20px 10px;
+	width : 100px;
+	height : 40px;
+	font-size: 20px;
+	font-weight : 600;
+	border : none;
+	border-radius: 7px;
+}
+
+.reserve_btn:hover{
+	background-color: black;
+	cursor: pointer;
+	color: white;
+}
+
+/* 테이블 css */
+.reserve-info {
+    margin-top: 2rem;
+	display: flex;
+	gap: 3rem;
+}
+
+#reserve-info-table {
+	display: none;
+	max-width: 40%;
+	margin-left: 150px;
+	/* margin-top: 1rem; */
+
+}
+#reserve-info-table td {
+	padding: 10px 15px;
+}
+
+#reserve-info-table tr.enabled td:nth-child(2) {
+	color: chartreuse;
+}
+
+#reserve-info-table tr.disabled td:nth-child(2) {
+	color: crimson;
+}
+
+#accordion {
+	display: none;
+	max-width: 40%;
+}
+
+#accordion-date, #accordion .card-header {
+	font-weight: bold;
+}
+
+
+.accordion-study-time {
+	padding: 0.6rem;
+	border: 1px #8a8a8a solid;
+	text-align: center;
+}
+
+.accordion-study-time.enabled{
+	background-color: #00990080;
+}
+
+.accordion-study-time.enabled:hover{
+	cursor: pointer;
+	box-shadow: 0 0 10px #00a100;
+
+}
+
+.accordion-study-time.selected{
+	border: 4px #f82b2b solid;
+}
+
+.accordion-study-time.disabled{
+	background-color: #dbdbdb;
+	pointer-events: none;
+}
+
+#numOfMember {
+	min-width: 5rem;
+	text-align: center;
+	border: 2px #dbdbdb solid;
+	border-radius: 4px;
+}
+
+
+
+
+/* 카카오 맵 css */
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	text-align : center;
+	width : calc(100% - 150px);
+	left: 150px;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 200px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+
+#marker_div {
+	z-index: 1;
+	padding: 7px;
+	text-align: center;
+}

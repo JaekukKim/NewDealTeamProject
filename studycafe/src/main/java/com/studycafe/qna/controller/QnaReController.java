@@ -76,14 +76,38 @@ public class QnaReController {
 		
 		try {
 
-			Long qnaNum = (Long)qnaReEntity.getQnaReNum();
+			Long qnaReNum = (Long)qnaReEntity.getQnaReNum();
 			
-			qnaReSer.qnaReDelete(qnaNum);
+			qnaReSer.qnaReDelete(qnaReNum);
 			
 			result.put("status", "ok");
 			
 			return result;
 		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "fail");
+			
+			return result;
+		}
+	}
+	
+	@PostMapping("/qnaReModify")
+	@ResponseBody
+	public Map<String, Object> studyReplyModify(@RequestBody QnaReEntity qnaReEntity) {
+
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		
+		System.out.println("qnaReEntity??????? : " + qnaReEntity);
+
+		
+		try {
+			qnaReSer.qnaReInsert(qnaReEntity); // 댓글 작성
+			
+			result.put("status", "ok");
+			
+			return result;
+		} catch(Exception e) {
 			e.printStackTrace();
 			result.put("status", "fail");
 			

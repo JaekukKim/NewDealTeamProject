@@ -8,7 +8,7 @@
 
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <fmt:parseDate var="date" value="${studyEntity.dateTime}" pattern="yyyy-MM-dd'T'HH:mm"/>
@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${studyEntity.studyTitle}</title>
 <link rel="stylesheet" type="text/css" href="/css/studydetail.css">
 <!-- 폰트어썸 아이콘 https://fontawesome.com/ -->
 <script src="https://kit.fontawesome.com/b780cabc8c.js" crossorigin="anonymous"></script>

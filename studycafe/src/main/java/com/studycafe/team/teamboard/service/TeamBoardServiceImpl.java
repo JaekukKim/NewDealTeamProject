@@ -65,6 +65,8 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 				.teamBoardNum(teamBoardEntity.getTeamBoardNum())
 				.teamBoardTitle(teamBoardEntity.getTeamBoardTitle())
 				.teamBoardContent(teamBoardEntity.getTeamBoardContent())
+				.teamName(teamBoardEntity.getTeamName())
+				.teamMember(teamBoardEntity.getTeamMember())
 				.teamBoardWriter(teamBoardEntity.getTeamBoardWriter())
 				.createDate(teamBoardEntity.getCreateDate())
 				.build();
@@ -80,7 +82,7 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 		boolean isPresent = teamBoardRepository.findById(idx).isPresent();
 
 		try {
-			
+
 			if (isPresent) {
 
 				teamBoardRepository.deleteById(idx);
@@ -102,5 +104,4 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 		// TODO Auto-generated method stub
 		return teamBoardRepository.findAll(Sort.by(Sort.Direction.DESC, "teamBoardNum"));
 	}
-
 }

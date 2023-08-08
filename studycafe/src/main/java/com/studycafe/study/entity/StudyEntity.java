@@ -33,7 +33,7 @@ public class StudyEntity {
 	private String studyContent; // 게시글 내용
 
 	// @NotNull
-	@Column(columnDefinition = "TEXT", length = 20)
+	@Column(columnDefinition = "TEXT", length = 100)
 	private String studyWriter; // 게시글 작성자
 
 	// @NotNull

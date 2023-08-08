@@ -11,6 +11,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.studycafe.member.auth.PrincipalDetailsService;
+import com.studycafe.member.oauth2.service.Oauth2MemberAdaptor;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -18,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
-
-	private final UserDetailServiceSub userDetailService;
+	private final Oauth2MemberAdaptor customOauth2UserService;
+	private final PrincipalDetailsService principalDetailsService;
 	private final DataSource dataSource;
 	
 	@Bean
@@ -30,7 +33,7 @@ public class SecurityConfig {
 			.antMatchers("/member/**").authenticated()
 			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
 //			.antMatchers("/studyregistration").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER') or hasRole('TEAM_HEAD')")
-//			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
@@ -42,13 +45,18 @@ public class SecurityConfig {
 			.logoutSuccessUrl("/")
 		.and()
 			.rememberMe()
-			.userDetailsService(userDetailService)
-			.tokenRepository(tokenRepository());
+			.userDetailsService(principalDetailsService)
+			.tokenRepository(tokenRepository())
+		.and()
+			.oauth2Login()
+			.userInfoEndpoint() // oauth2 로그인 성공시 가져올 설정.
+			.userService(customOauth2UserService);
+			
 		return http.build();
 	}
 
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
+	public static BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	

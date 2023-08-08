@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- 로그인 한 회원 정보 사용 -->
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
+	<sec:authentication property="principal.memberEntity" var="member" />
 </sec:authorize>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -28,6 +28,7 @@
 				<p>
 					<label for="team-title">제목</label>
 					<input type="text" id="team-title" name="csTitle" value="${csPost.csTitle }" readonly="readonly">
+					<input type="text" id="idx" name="idx" value="${csPost.idx}" hidden="hidden">
 				</p>
 
 				<p>
@@ -46,28 +47,54 @@
 						${csPost.csContent }
 					</textarea>
 				</div>
-				
+
 				<p>
 					<label for="file">첨부파일</label>
-					
+
 					<c:choose>
 						<c:when test="${csPost.fileKey eq 'none.png' }">
 							<span>첨부파일 없음</span>
 						</c:when>
 						<c:otherwise>
-							<img class="file-img" src="${csPost.filePath }"/>
+							<img class="file-img" src="${csPost.filePath }" />
 						</c:otherwise>
 					</c:choose>
 				</p>
 
 				<c:if test="${member.nickName.equals(csPost.csWriter) }">
 					<p class="modify-delete-box">
-						<a type="submit" id="modify-btn" href="${contextPath }/cs/modifyview/${csPost.idx}">수정</a>
-						<a type="submit" id="delete-btn" href="javascript:removePost('${csPost.idx}','cs')">삭제</a>
+						<a type="submit" id="modify-btn" href="${contextPath }/cs/modifyview/${csPost.idx}">수정</a> <a type="submit" id="delete-btn"
+							href="javascript:removePost('${csPost.idx}','cs')">삭제</a>
 					</p>
 				</c:if>
 			</form>
 
+			<hr>
+
+			<div class="content-wrap">
+				<p>
+					<label>댓글</label>
+				</p>
+				<div>
+					<ul class="reply-list" id="reply-list"></ul>
+					<c:choose>
+						<c:when test="${member.role == 'ROLE_ADMIN'}">
+							<c:if test="${not empty member.nickName}">
+								<div>
+									<input type="hidden" id="nickName" value="${member.nickName}">
+									<textarea class="comment" id="comment" rows="5" placeholder="코멘트 달기"></textarea>
+									<button class="btn btn-dark" id="commentBtn" type="button" onclick="csReplyInsert();">작성</button>
+								</div>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<div class="content-wrap" align="center">
+								<h2>관리자만 답변 작성이 가능합니다.</h2>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
 		</div>
 	</div>
 

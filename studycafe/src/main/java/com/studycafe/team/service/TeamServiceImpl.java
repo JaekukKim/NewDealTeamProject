@@ -19,9 +19,9 @@ public class TeamServiceImpl implements TeamService {
 	private TeamRepository teamRepository;
 
 	@Override
-	public void teamInsert(TeamEntity teamEntity) {
+	public TeamEntity teamInsert(TeamEntity teamEntity) {
 		// TODO Auto-generated method stub
-		teamRepository.save(teamEntity);
+		return teamRepository.save(teamEntity);
 
 	}
 
@@ -74,5 +74,19 @@ public class TeamServiceImpl implements TeamService {
 		teamRepository.saveAndFlush(teamEntity);
 		
 	}
+
+	@Override
+	public boolean findTeamByName(String name) {
+		// TODO Auto-generated method stub
+		return teamRepository.existsByTeamName(name);
+	}
+
+	@Override
+	public TeamEntity getMyTeam(long teamNumber) {
+		TeamEntity team = teamRepository.findByTeamNumber(teamNumber);
+		return team;
+	}
+
+
 
 }

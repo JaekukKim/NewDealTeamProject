@@ -90,9 +90,11 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public List<StudyEntity> studySelectByMap(double lat, double lon, LocalDate date) {
-		// TODO Auto-generated method stub		
-		return studyRepository.findByMap(lat, lon, date);
+		// TODO Auto-generated method stub
+		return studyRepository.findByLatitudeAndLongitudeAndReserveDate(lat, lon, date);
 	}
+
+
 
 
 }
